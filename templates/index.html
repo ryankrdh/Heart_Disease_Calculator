@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Disease Risk Assessment</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../heart_icon.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             padding-top: 40px;
-            background-color: #E0F7FA; /* Light blue background */
+            background-color: #E0F7FA;
         }
         .form-container {
             padding: 30px;
@@ -18,7 +17,7 @@
             border: 1px solid #B2EBF2;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,.1);
-            margin-bottom: 20px; /* Adds spacing to the bottom */
+            margin-bottom: 20px;
         }
         .footer {
             text-align: center;
@@ -46,102 +45,102 @@
                         <input type="number" class="form-control" id="age" name="age" required>
                     </div>
                     <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select class="form-control" id="gender" name="gender" required>
+                        <label for="sex">Gender</label>
+                        <select class="form-control" id="sex" name="sex" required>
                             <option value="">Select...</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
                         </select>
                     </div>
+                    <!-- Additional fields based on new risk factors -->
+                    <!-- Chest Pain Type -->
                     <div class="form-group">
-                        <label for="familyHistory">Family History</label>
-                        <select class="form-control" id="familyHistory" name="familyHistory" required>
+                        <label for="cp">Chest Pain Type</label>
+                        <select class="form-control" id="cp" name="cp" required>
                             <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="unknown">Unknown</option>
+                            <option value="0">Typical angina</option>
+                            <option value="1">Atypical angina</option>
+                            <option value="2">Non-anginal pain</option>
+                            <option value="3">Asymptomatic</option>
                         </select>
                     </div>
+                    <!-- Resting Blood Pressure -->
                     <div class="form-group">
-                        <label for="smoking">Smoking</label>
-                        <select class="form-control" id="smoking" name="smoking" required>
+                        <label for="trestbps">Resting Blood Pressure (in mm Hg)</label>
+                        <input type="number" class="form-control" id="trestbps" name="trestbps" required>
+                    </div>
+                    <!-- Cholesterol -->
+                    <div class="form-group">
+                        <label for="chol">Cholesterol (in mg/dL)</label>
+                        <input type="number" class="form-control" id="chol" name="chol" required>
+                    </div>
+                    <!-- Fasting Blood Sugar -->
+                    <div class="form-group">
+                        <label for="fbs">Fasting Blood Sugar > 120 mg/dL</label>
+                        <select class="form-control" id="fbs" name="fbs" required>
                             <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="occasionally">Occasionally</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
                         </select>
                     </div>
+                    <!-- Resting ECG -->
                     <div class="form-group">
-                        <label for="diet">Diet</label>
-                        <select class="form-control" id="diet" name="diet" required>
+                        <label for="restecg">Resting Electrocardiographic Results</label>
+                        <select class="form-control" id="restecg" name="restecg" required>
                             <option value="">Select...</option>
-                            <option value="healthy">Healthy</option>
-                            <option value="unhealthy">Unhealthy</option>
-                            <option value="moderate">Moderate</option>
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T wave abnormality</option>
+                            <option value="2">Left ventricular hypertrophy</option>
                         </select>
                     </div>
+                    <!-- Maximum Heart Rate Achieved -->
                     <div class="form-group">
-                        <label for="physicalActivity">Physical Activity</label>
-                        <select class="form-control" id="physicalActivity" name="physicalActivity" required>
+                        <label for="thalach">Maximum Heart Rate Achieved</label>
+                        <input type="number" class="form-control" id="thalach" name="thalach" required>
+                    </div>
+                    <!-- Exercise Induced Angina -->
+                    <div class="form-group">
+                        <label for="exang">Exercise Induced Angina</label>
+                        <select class="form-control" id="exang" name="exang" required>
                             <option value="">Select...</option>
-                            <option value="active">Active</option>
-                            <option value="sedentary">Sedentary</option>
-                            <option value="moderately active">Moderately Active</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
                         </select>
                     </div>
+                    <!-- ST Depression -->
                     <div class="form-group">
-                        <label for="obesity">Obesity</label>
-                        <select class="form-control" id="obesity" name="obesity" required>
+                        <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest in mm</label>
+                        <input type="number" step="0.1" class="form-control" id="oldpeak" name="oldpeak" required>
+                    </div>
+                    <!-- Slope of the Peak Exercise ST Segment -->
+                    <div class="form-group">
+                        <label for="slope">Slope of the Peak Exercise ST Segment</label>
+                        <select class="form-control" id="slope" name="slope" required>
                             <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="borderline">Borderline</option>
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
                         </select>
                     </div>
+                    <!-- Number of Major Vessels -->
                     <div class="form-group">
-                        <label for="diabetes">Diabetes</label>
-                        <select class="form-control" id="diabetes" name="diabetes" required>
+                        <label for="ca">Number of Major Vessels Colored by Fluoroscopy</label>
+                        <select class="form-control" id="ca" name="ca" required>
                             <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="pre-diabetes">Pre-diabetes</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                         </select>
                     </div>
+                    <!-- Thalassemia -->
                     <div class="form-group">
-                        <label for="highBloodPressure">High Blood Pressure</label>
-                        <select class="form-control" id="highBloodPressure" name="highBloodPressure" required>
+                        <label for="thal">Thalassemia</label>
+                        <select class="form-control" id="thal" name="thal" required>
                             <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="borderline">Borderline</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="stressAndMentalHealth">Stress and Mental Health</label>
-                        <select class="form-control" id="stressAndMentalHealth" name="stressAndMentalHealth" required>
-                            <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="sometimes">Sometimes</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="alcoholConsumption">Alcohol Consumption</label>
-                        <select class="form-control" id="alcoholConsumption" name="alcoholConsumption" required>
-                            <option value="">Select...</option>
-                            <option value="none">None</option>
-                            <option value="light">Light</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="heavy">Heavy</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sleepPatterns">Sleep Patterns</label>
-                        <select class="form-control" id="sleepPatterns" name="sleepPatterns" required>
-                            <option value="">Select...</option>
-                            <option value="regular">Regular</option>
-                            <option value="irregular">Irregular</option>
-                            <option value="often disturbed">Often Disturbed</option>
+                            <option value="3">Normal</option>
+                            <option value="1">Fixed defect</option>
+                            <option value="6">Reversible defect</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Calculate</button>
@@ -150,9 +149,8 @@
         </div>
     </div>
 </div>
-<!-- Footer -->
 <div class="footer">
-    <p class="footer-description">Hyunmin Kim    Chiao-Yu    Ruohui Huang</p>
+    <p class="footer-description">Hyunmin Kim - Chiao-Yu - Ruohui Huang</p>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
