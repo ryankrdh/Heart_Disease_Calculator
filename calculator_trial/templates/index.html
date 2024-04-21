@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Assessment</title>
+    <link rel="icon" type="image/png" href="../heart_icon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { padding-top: 40px; background-color: #E0F7FA; }
+        .form-container { padding: 30px; background-color: #ffffff; border: 1px solid #B2EBF2; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,.1); margin-bottom: 20px; }
+        .footer { text-align: center; padding: 20px 0; margin-top: 40px; background-color: #B2EBF2; color: #0277BD; border-top: 1px solid #B2EBF2; }
+        .footer-description { margin: 0; font-size: 16px; }
+    </style>
+<script>
+    function gatherRiskFactors() {
+        let formData = {};
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            let value = select.value;
+            let factor = select.id;
+            formData[factor] = value;  // Store the textual representation
+        });
+        return formData;
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const formData = gatherRiskFactors();
+        const form = event.target;
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  // Set the headers to tell the server it's JSON
+            },
+            body: JSON.stringify(formData)
+        }).then(response => response.json())
+          .then(data => {
+              console.log('Success:', data);
+              alert('Risk calculation complete: ' + data.result);
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+    }
+</script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="form-container">
+                <h2 class="text-center mb-4">Heart Disease Risk Assessment</h2>
+                <form action="/submit" method="post">
+                    <div class="form-group">
+                        <label for="age">Age Group</label>
+                        <select class="form-control" id="age" name="age" required>
+                            <option value="Under 40">Under 40</option>
+                            <option value="40-59">40-59</option>
+                            <option value="60+">60+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Gender</label>
+                        <select class="form-control" id="sex" name="sex" required>
+                            <option value="">Select...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cp">Chest Pain Type</label>
+                        <select class="form-control" id="cp" name="cp" required>
+                            <option value="">Select...</option>
+                            <option value="Typical angina">Typical angina</option>
+                            <option value="Atypical angina">Atypical angina</option>
+                            <option value="Non-anginal pain">Non-anginal pain</option>
+                            <option value="Asymptomatic">Asymptomatic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="trestbps">Resting Blood Pressure Range (mm Hg)</label>
+                        <select class="form-control" id="trestbps" name="trestbps" required>
+                            <option value="Under 100">Under 100</option>
+                            <option value="100-109">100-109</option>
+                            <option value="110-119">110-119</option>
+                            <option value="120+">120+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="chol">Cholesterol Range (mg/dL)</label>
+                        <select class="form-control" id="chol" name="chol" required>
+                            <option value="Under 200">Under 200</option>
+                            <option value="200-239">200-239</option>
+                            <option value="240+">240+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fbs">Fasting Blood Sugar > 120 mg/dL</label>
+                        <select class="form-control" id="fbs" name="fbs" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="restecg">Resting Electrocardiographic Results</label>
+                        <select class="form-control" id="restecg" name="restecg" required>
+                            <option value="Normal">Normal</option>
+                            <option value="ST-T wave abnormality">ST-T wave abnormality</option>
+                            <option value="Left ventricular hypertrophy">Left ventricular hypertrophy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="thalach">Maximum Heart Rate Achieved</label>
+                        <select class="form-control" id="thalach" name="thalach" required>
+                            <option value="Above 140">Above 140</option>
+                            <option value="121-140">121-140</option>
+                            <option value="100-120">100-120</option>
+                            <option value="Less than 100">Less than 100</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exang">Exercise Induced Angina</label>
+                        <select class="form-control" id="exang" name="exang" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest</label>
+                        <select class="form-control" id="oldpeak" name="oldpeak" required>
+                            <option value="Less than 1 mm">Less than 1 mm</option>
+                            <option value="1-2 mm">1-2 mm</option>
+                            <option value="2-3 mm">2-3 mm</option>
+                            <option value="More than 3 mm">More than 3 mm</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="slope">Slope of the Peak Exercise ST Segment</label>
+                        <select class="form-control" id="slope" name="slope" required>
+                            <option value="Upsloping">Upsloping</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Downsloping">Downsloping</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ca">Number of Major Vessels Colored by Fluoroscopy</label>
+                        <select class="form-control" id="ca" name="ca" required>
+                            <option value="0 Major Vessels">0 Major Vessels</option>
+                            <option value="1 Major Vessels">1 Major Vessels</option>
+                            <option value="2 Major Vessels">2 Major Vessels</option>
+                            <option value="3 Major Vessels">3 Major Vessels</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="thal">Thalassemia</label>
+                        <select class="form-control" id="thal" name="thal" required>
+                            <option value="Normal">Normal</option>
+                            <option value="Fixed defect">Fixed defect</option>
+                            <option value="Reversible defect">Reversible defect</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p class="footer-description">Hyunmin Kim - Chiao-Yu - Ruohui Huang</p>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

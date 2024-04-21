@@ -29,22 +29,9 @@
 ### Step 4: Run the app
     python3 app.py
 
-
-## If you need to manually install dependencies:
-    brew install python@3.9
-    pip3 install pandas
-    pip3 install scikit_learn
-    pip3 install flask
-
-
 ## Introduction
 
 Our application is a heart disease risk analysis tool designed to calculate the probability of an individual’s risk of developing heart disease. Utilizing advanced statistical methods and discrete mathematics principles, this tool analyzes a wide range of factors to quantify risk levels accurately. Our goal is to provide a resource that individuals and healthcare providers can use to assess heart disease risk and implement preventive measures effectively.
-
-## Data Dictionary
-
-The application evaluates the following factors to predict heart disease risk:
-
 
 ## Data Dictionary
 
@@ -285,45 +272,3 @@ By integrating discrete mathematics and statistical methods learned in class, we
 
 This tool has the potential to significantly impact how individuals and healthcare providers approach heart disease prevention. By offering a comprehensive analysis of various risk factors, it enables a proactive approach to health and wellness, encouraging lifestyle adjustments and interventions that can substantially reduce the risk of heart disease.
 
-#
-# HOW IT WORKS
-
-### 1. Data Loading and Splitting
-
-#### Example:
-Suppose you have a dataset `heart.csv` that records medical attributes of 1000 patients, including their age, blood pressure, cholesterol levels, and whether they had a heart attack (output).
-
-Here's a simple illustration of what the data might look like:
-
-| age | sex | cp | trestbps | chol | output |
-|-----|-----|----|----------|------|--------|
-| 63  | 1   | 3  | 145      | 233  | 1      |
-| 37  | 1   | 2  | 130      | 250  | 1      |
-| 41  | 0   | 1  | 130      | 204  | 1      |
-|...  | ... |... | ...      | ...  | ...    |
-
-- **Features (X):** age, sex, cp (chest pain type), trestbps (resting blood pressure), chol (cholesterol)
-- **Target (y):** output (1 if had a heart attack, 0 if not)
-
-#### Data Splitting:
-- The data is typically split into a training set (75% of the data) and a testing set (25% of the data).
-- **Training set** is used to train the model.
-- **Testing set** is used to evaluate how well the model performs on unseen data.
-
-### Math behind Splitting:
-If you have 1000 patient records, the training set would have 750 records, and the testing set would have 250.
-
-### 2. Model Training
-
-#### Gaussian Naive Bayes Model:
-This model calculates the probability of each class (heart attack or no heart attack) based on the assumption that the input features follow a Gaussian (normal) distribution. 
-
-<img src="math_example.png" width="700" height="500"></a>
-### Prediction:
-The model calculates such probabilities for each feature (age, sex, cp, etc.) and multiplies them to get the overall probability for each class. The class with the highest probability is the model's prediction.
-
-### Challenge with Limited Data:
-- **Limited Variation:** With small datasets, the model may not see enough variation in the data to accurately learn the distribution of each feature per class. For example, if most patients in the dataset who had heart attacks were men, the model might overly associate heart attacks with being male, which isn't necessarily true globally.
-- **Overfitting:** The model might perform well on the training data but poorly on the testing data, indicating it has learned the noise and specific patterns in the training data rather than generalizing from it.
-
-This lack of data diversity and volume can lead to biases and inaccuracies in predictions when applied to the general population, where a wider variety of cases and exceptions exist.

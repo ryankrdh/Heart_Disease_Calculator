@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assessment Result</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../heart_icon.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -18,19 +17,12 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-subtitle mb-2">Based on the information you provided, your assessment is as follows:</h4>
-                    <p class="card-text alert alert-info">{{ result_message }}</p>
-                    <h5>Understanding Your Risk Calculation</h5>
-                    <p>Your heart disease risk was calculated based on the following factors:</p>
                     <ul>
-                        {% for factor in factors %}
-                        <li>{{ factor }}</li>
+                        {% for factor, description, decimal in total_risk_factors %}
+                            <li>{{ factor }} ({{ description }}): {{ decimal }}</li>
                         {% endfor %}
                     </ul>
-                    <h5>Probability Calculation</h5>
-                    <p>{{ equation }}</p>
-                    <div class="alert alert-success" role="alert">
-                        <strong>Your calculated probability of heart disease is {{ probability }}%.</strong>
-                    </div>
+                    <p class="card-text alert alert-info">{{ result_message }}</p>
                     <a href="/" class="card-link btn btn-primary">Take the assessment again</a>
                 </div>
             </div>
