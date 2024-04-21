@@ -288,22 +288,28 @@ This tool has the potential to significantly impact how individuals and healthca
 #
 # HOW IT WORKS
 
+
+### What is Gaussian Naive Bayes?
+The Gaussian Naive Bayes model is a type of probability model used to make predictions based on data. It assumes that each numerical input (like age or blood pressure) follows a pattern that fits into a bell curve or normal distribution. This is why it's called "Gaussian."
+
+### Why "Naive"?
+It's called "naive" because it assumes that all features (like age, cholesterol levels, etc.) are independent of each other, which simplifies the calculations but isn't always true in real life.
+
 ### 1. Data Loading and Splitting
 
-#### Example:
-Suppose you have a dataset `heart.csv` that records medical attributes of 1000 patients, including their age, blood pressure, cholesterol levels, and whether they had a heart attack (output).
+Our dataset `heart.csv` holds medical attributes of 303 patients, including their age, blood pressure, cholesterol levels, and whether they had a heart attack (target), etc.
 
 Here's a simple illustration of what the data might look like:
 
-| age | sex | cp | trestbps | chol | output |
-|-----|-----|----|----------|------|--------|
-| 63  | 1   | 3  | 145      | 233  | 1      |
-| 37  | 1   | 2  | 130      | 250  | 1      |
-| 41  | 0   | 1  | 130      | 204  | 1      |
-|...  | ... |... | ...      | ...  | ...    |
+| age | sex | cp | trestbps | chol | ... | target |
+|-----|-----|----|----------|------| --- |--------|
+| 63  | 1   | 3  | 145      | 233  | ... | 1      |
+| 37  | 1   | 2  | 130      | 250  | ... | 1      |
+| 41  | 0   | 1  | 130      | 131  | ... | 0      |
+|...  | ... |... | ...      | ...  | ... | ...    |
 
-- **Features (X):** age, sex, cp (chest pain type), trestbps (resting blood pressure), chol (cholesterol)
-- **Target (y):** output (1 if had a heart attack, 0 if not)
+- **Features (X):** age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal
+- **Target (y):** target(output) (1 if had a heart attack, 0 if not)
 
 #### Data Splitting:
 - The data is typically split into a training set (75% of the data) and a testing set (25% of the data).
@@ -311,6 +317,7 @@ Here's a simple illustration of what the data might look like:
 - **Testing set** is used to evaluate how well the model performs on unseen data.
 
 ### Math behind Splitting:
+#### Example:
 If you have 1000 patient records, the training set would have 750 records, and the testing set would have 250.
 
 ### 2. Model Training
@@ -318,12 +325,20 @@ If you have 1000 patient records, the training set would have 750 records, and t
 #### Gaussian Naive Bayes Model:
 This model calculates the probability of each class (heart attack or no heart attack) based on the assumption that the input features follow a Gaussian (normal) distribution. 
 
-<img src="math_example.png" width="700" height="500"></a>
-### Prediction:
-The model calculates such probabilities for each feature (age, sex, cp, etc.) and multiplies them to get the overall probability for each class. The class with the highest probability is the model's prediction.
+### The Math Behind It
+#### The formula used is:
 
-### Challenge with Limited Data:
-- **Limited Variation:** With small datasets, the model may not see enough variation in the data to accurately learn the distribution of each feature per class. For example, if most patients in the dataset who had heart attacks were men, the model might overly associate heart attacks with being male, which isn't necessarily true globally.
-- **Overfitting:** The model might perform well on the training data but poorly on the testing data, indicating it has learned the noise and specific patterns in the training data rather than generalizing from it.
+<img src="math_example1.png" width="500" height="150"></a>
 
-This lack of data diversity and volume can lead to biases and inaccuracies in predictions when applied to the general population, where a wider variety of cases and exceptions exist.
+### Where:
+
+* x is the value we're checking (in our case, 60).
+* μ is the mean age for each class.
+* σ is the standard deviation for each class.
+* π exp are mathematical constants.
+
+<img src="math_example2.png" width="800" height="450"></a>
+
+### Conclusion:
+The model then compares these probabilities. If the probability for Class 1 is higher than for Class 0, it predicts a heart attack; otherwise, it predicts no heart attack. These probabilities help doctors or health systems estimate risks based on statistical patterns seen in past data.
+
