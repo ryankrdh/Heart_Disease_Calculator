@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Attack Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Attack Prediction</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if probability is defined %}
+            <p class="result">Probability of getting a heart attack: {{ probability }}</p>
+        {% endif %}
+        <form method="post">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required>
+
+            <label for="sex">Sex (0 for female, 1 for male):</label>
+            <input type="text" id="sex" name="sex" required>
+
+            <label for="cp">Chest pain type (0-3):</label>
+            <input type="text" id="cp" name="cp" required>
+
+            <label for="trtbps">Resting blood pressure:</label>
+            <input type="text" id="trtbps" name="trtbps" required>
+
+            <label for="chol">Serum cholesterol in mg/dl:</label>
+            <input type="text" id="chol" name="chol" required>
+
+            <label for="fbs">Fasting blood sugar > 120 mg/dl (0 for false, 1 for true):</label>
+            <input type="text" id="fbs" name="fbs" required>
+
+            <label for="restecg">Resting electrocardiographic results (0-2):</label>
+            <input type="text" id="restecg" name="restecg" required>
+
+            <label for="thalachh">Maximum heart rate achieved:</label>
+            <input type="text" id="thalachh" name="thalachh" required>
+
+            <label for="exng">Exercise-induced angina (0 for no, 1 for yes):</label>
+            <input type="text" id="exng" name="exng" required>
+
+            <label for="oldpeak">ST depression induced by exercise relative to rest:</label>
+            <input type="text" id="oldpeak" name="oldpeak" required>
+
+            <label for="slp">Slope of the peak exercise ST segment (0-2):</label>
+            <input type="text" id="slp" name="slp" required>
+
+            <label for="caa">Number of major vessels colored by fluoroscopy (0-3):</label>
+            <input type="text" id="caa" name="caa" required>
+
+            <label for="thall">Thal (0-3):</label>
+            <input type="text" id="thall" name="thall" required>
+
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
