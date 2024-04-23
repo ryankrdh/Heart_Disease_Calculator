@@ -19,9 +19,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 nb_model = GaussianNB()
 nb_model.fit(X_train, y_train)
 
-# Evaluate the model's performance
-# accuracy = nb_model.score(X_test, y_test)
-# print(f"Accuracy: {accuracy * 100:.2f}%")
 
 def predict_heart_attack():
     """
@@ -48,6 +45,7 @@ def predict_heart_attack():
     probability_heart_attack = f"{probability[1] * 100:.2f}%"
     return render_template('index.html', probability=probability_heart_attack)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """
@@ -60,6 +58,7 @@ def index():
     if request.method == 'POST':
         return predict_heart_attack()
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

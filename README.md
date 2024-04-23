@@ -56,20 +56,6 @@ The application evaluates the following factors to predict heart disease risk:
 Description: Age in years of the patient.  
 Role in Risk Assessment: Older age is generally associated with a higher risk of heart disease.
 
-### Values and Scoring
-- **Under 40**:
-  - **Risk**: Significantly lower
-  - **Explanation**: Lower risk due to younger age.
-- **Age 40-59**:
-  - **Risk**: Approximately 40%
-  - **Explanation**: Moderate risk reflecting increased age.
-- **Age 60-79**:
-  - **Risk**: Approximately 75%
-  - **Explanation**: Higher risk as age increases.
-- **Age 80 and above**:
-  - **Risk**: Approximately 86%
-  - **Explanation**: Highest risk category due to advanced age.
-
 ## Sex (sex)
 Description: Biological sex of the patient.  
 Role in Risk Assessment: Sex can influence the risk and presentation of heart disease, with males typically at higher risk.
